@@ -1,10 +1,10 @@
 {
-  "name": "package-name",
+  "name": "@redchili/storage-util",
   "version": "0.0.1",
   "main": "dist/index.js",
   "license": "MIT",
-  "registry": "",
-  "homepage": "",
+  "registry": "https://github.com/xiamu14/storage-util.git",
+  "homepage": "https://github.com/xiamu14/storage-util",
   "files": [
     "dist/*"
   ],
@@ -13,6 +13,7 @@
     "dev": "rollup -c -w",
     "build": "rimraf dist && rollup -c",
     "jest": "yarn build && jest --coverage",
+    "release": "standard-version",
     "release:major": "standard-version -r major",
     "release:minor": "standard-version -r minor",
     "release:patch": "standard-version -r patch"

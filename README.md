@@ -1,15 +1,36 @@
-# pure typescript package
+# storage-util
 
-只基于 typescript 的代码包模版
+localStorage 和 sessionStorage 的工具库，增加 typescript的类型定义，可以在业务中限制 key-value 的类型，防止代码里无序的使用 storage。
 
-## 指南
+## 使用方式
 
-// 初次发布版本
-`npm run release --first-release`
+1. 初始化并导出 storage 实例
+```ts
+// session-util.ts
+import StorageBase from "@redchili/storage-util";
 
-// 添加版本信息和指定发布版本等级
-`npm run release -m "Commit message" -r minor`
-`// major: 1.0.0 -> 2.0.0, minor: 1.0.0 -> 1.1.0, patch : 1.0.0 -> 1.0.1`
+export interface SessionProps { // 定义好业务中用到的所有 session key-value 类型
+  token: string;
+  money: money;
+  thing: any;
+}
 
-// 确认发布，npm publish 发布到 npm
-`git push --follow-tags origin master && npm publish`
+export type SessionKey = keyof SessionProps;
+
+const sessionUtil = new StorageBase<SessionProps>("sessionStorage"); // localStorage
+
+export default sessionUtil;
+
+```
+
+2. 在代码中使用 sessionUtil
+
+```ts
+import sessionUtil from 'session-util'
+
+sessionUtil.getItem('token');// great
+sessionUtil.getItem('authToken'); // invalid, ts error
+
+sessionUtil.setItem('token', '123123'); // great
+sessionUtil.setItem('token', 123123); // invalid, ts error
+```
