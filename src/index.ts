@@ -2,16 +2,18 @@ import { StorageType } from "./type";
 
 // Storage 基类
 export default class StorageBase<Props extends Record<string, any>> {
-  static type: StorageType;
+  
+
+  storageType: StorageType = 'localStorage'
 
   constructor(type: StorageType) {
-    StorageBase.type = type;
+    this.storageType = type;
   }
 
   /* 本方法获取本地存储值 */
   getItem<U extends keyof Props>(key: U): Props[U] {
     if (typeof key === "string") {
-      let result: any = window[StorageBase.type].getItem(key);
+      let result: any = window[this.storageType].getItem(key);
       try {
         return JSON.parse(result);
       } catch (error) {
@@ -27,16 +29,16 @@ export default class StorageBase<Props extends Record<string, any>> {
     value: T[U]
   ): void {
     const val = typeof value === "string" ? value : JSON.stringify(value);
-    window[StorageBase.type].setItem(key, val);
+    window[this.storageType].setItem(key, val);
   }
 
   /* 本方法移除指定的本地存储值 */
   removeItem(key: keyof Props & string): void {
-    window[StorageBase.type].removeItem(key);
+    window[this.storageType].removeItem(key);
   }
 
   /* 本方法清除所有的本地存储值 */
   clear() {
-    window[StorageBase.type].clear();
+    window[this.storageType].clear();
   }
 }
