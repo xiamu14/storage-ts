@@ -2,7 +2,7 @@ import { StorageType } from "./type";
 
 // Storage 基类
 export default class StorageBase<Props extends Record<string, any>> {
-  
+
 
   storageType: StorageType = 'localStorage'
 
@@ -35,6 +35,13 @@ export default class StorageBase<Props extends Record<string, any>> {
   /* 本方法移除指定的本地存储值 */
   removeItem(key: keyof Props & string): void {
     window[this.storageType].removeItem(key);
+  }
+
+  /* 本方法移除一组指定的本地存储值 */
+  removeItems(keys:(keyof Props & string)[]): void {
+    keys.forEach(key=>{
+      window[this.storageType].removeItem(key);
+    })
   }
 
   /* 本方法清除所有的本地存储值 */
