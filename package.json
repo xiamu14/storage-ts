@@ -1,41 +1,33 @@
 {
-  "name": "@redchili/storage-util",
-  "version": "0.1.0",
+  "name": "@redchili/storage-ts",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
-  "registry": "https://github.com/xiamu14/storage-util.git",
-  "homepage": "https://github.com/xiamu14/storage-util",
+  "registry": "https://github.com/xiamu14/storage-ts.git",
+  "homepage": "https://github.com/xiamu14/storage-ts",
   "files": [
     "dist/*"
   ],
   "type": "module",
+  "tsup": {
+    "entry": ["src/index.ts","src/storage/*.ts"],
+    "format": "esm",
+    "dts": {
+      "resolve":true
+    },
+    "splitting": true,
+    "sourcemap": true,
+    "clean": true
+  },
   "scripts": {
-    "dev": "rollup -c -w",
-    "build": "rimraf dist && rollup -c",
-    "jest": "yarn build && jest --coverage",
-    "release": "standard-version",
-    "release:major": "standard-version -r major",
-    "release:minor": "standard-version -r minor",
-    "release:patch": "standard-version -r patch"
+    "build": "tsup"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
-    "@babel/preset-typescript": "^7.15.0",
-    "@rollup/plugin-multi-entry": "^4.1.0",
-    "@types/jest": "^27.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "@typescript-eslint/parser": "^4.32.0",
     "all-contributors-cli": "^6.20.0",
-    "babel-jest": "^27.2.3",
-    "eslint": "^7.32.0",
-    "jest": "^27.2.3",
+    "renew-it": "^1.5.5",
     "rimraf": "^3.0.2",
-    "rollup": "^2.57.0",
-    "rollup-plugin-filesize": "^9.1.1",
-    "rollup-plugin-typescript2": "^0.30.0",
     "ts-jest": "^27.0.5",
-    "standard-version": "^9.3.1",
+    "tsup": "^8.5.0",
     "typescript": "^4.4.3"
   },
   "dependencies": {}
